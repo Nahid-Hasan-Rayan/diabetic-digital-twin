@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroSync AI - Diabetic Digital Twin</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>NeuroSync AI</span>
+            </div>
+            <nav>
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#predictions" class="nav-link">Predictions</a>
+                <a href="#diet" class="nav-link">Diet AI</a>
+                <a href="#reports" class="nav-link">Reports</a>
+            </nav>
+            <div class="user-menu">
+                <div class="user-avatar">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section id="welcome" class="welcome-section glass-card">
+                <div class="welcome-content">
+                    <h1 class="gradient-text">Welcome to Your Digital Twin</h1>
+                    <p class="subtitle">AI-Powered Diabetes Management & Prediction System</p>
+                    <button class="cta-button" onclick="startAssessment()">
+                        <span>Begin Health Assessment</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="welcome-visual">
+                    <div class="dna-animation">
+                        <div class="helix"></div>
+                        <div class="helix"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assessment Section -->
+            <section id="assessment" class="assessment-section glass-card" style="display: none;">
+                <div class="assessment-header">
+                    <h2>Health Assessment</h2>
+                    <p>Help your digital twin understand your unique biology</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <form id="healthForm" class="assessment-form">
+                    <!-- Personal Information -->
+                    <div class="form-section active" id="section-personal">
+                        <h3><i class="fas fa-user"></i> Personal Profile</h3>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" required min="1" max="120">
+                            </div>
+                            <div class="input-group">
+                                <label for="weight">Weight (kg)</label>
+                                <input type="number" id="weight" required step="0.1">
+                            </div>
+                            <div class="input-group">
+                                <label for="height">Height (cm)</label>
+                                <input type="number" id="height" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="gender">Biological Sex</label>
+                                <select id="gender" required>
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div class="form-section" id="section-medical">
+                        <h3><i class="fas fa-heartbeat"></i> Medical Profile</h3>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="diabetesType">Diabetes Type</label>
+                                <select id="diabetesType" required>
+                                    <option value="">Select</option>
+                                    <option value="type1">Type 1</option>
+                                    <option value="type2">Type 2</option>
+                                    <option value="prediabetes">Pre-diabetes</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="currentBG">Current Blood Glucose (mg/dL)</label>
+                                <input type="number" id="currentBG" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="hba1c">Last HbA1c (%)</label>
+                                <input type="number" id="hba1c" step="0.1" min="4" max="20">
+                            </div>
+                            <div class="input-group">
+                                <label for="medications">Current Medications</label>
+                                <select id="medications" multiple>
+                                    <option value="metformin">Metformin</option>
+                                    <option value="insulin">Insulin</option>
+                                    <option value="glipizide">Glipizide</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lifestyle Factors -->
+                    <div class="form-section" id="section-lifestyle">
+                        <h3><i class="fas fa-running"></i> Lifestyle Factors</h3>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="activity">Activity Level</label>
+                                <select id="activity" required>
+                                    <option value="">Select</option>
+                                    <option value="sedentary">Sedentary</option>
+                                    <option value="light">Light Exercise</option>
+                                    <option value="moderate">Moderate (3-5 days/week)</option>
+                                    <option value="active">Active (6-7 days/week)</option>
+                                    <option value="athlete">Athlete</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="sleep">Average Sleep (hours)</label>
+                                <input type="number" id="sleep" min="0" max="24" step="0.5" value="7">
+                            </div>
+                            <div class="input-group">
+                                <label for="stress">Stress Level (1-10)</label>
+                                <input type="range" id="stress" min="1" max="10" value="5">
+                                <span id="stressValue">5</span>
+                            </div>
+                            <div class="input-group">
+                                <label for="diet">Typical Diet</label>
+                                <select id="diet">
+                                    <option value="standard">Standard</option>
+                                    <option value="lowcarb">Low Carb</option>
+                                    <option value="keto">Keto</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="form-navigation">
+                        <button type="button" class="btn-secondary" onclick="previousSection()">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" class="btn-primary" onclick="nextSection()">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="submit" class="btn-primary" id="submitBtn" style="display: none;">
+                            Generate Digital Twin <i class="fas fa-robot"></i>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="dashboard-section" style="display: none;">
+                <!-- Real-time Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-danger">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="currentGlucoseDisplay">--</h3>
+                            <p>Current Glucose</p>
+                            <div class="stat-trend" id="glucoseTrend">
+                                <i class="fas fa-minus"></i> Stable
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="insulinAdvice">--</h3>
+                            <p>Insulin Advice</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-calculator"></i> Calculated
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="predictionStatus">--</h3>
+                            <p>24h Prediction</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-brain"></i> AI Active
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="dietScore">--</h3>
+                            <p>Diet Score</p>
+                            <div class="stat-trend">
+                                <i class="fas fa-utensils"></i> Optimized
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="dashboard-grid">
+                    <!-- Glucose Prediction Chart -->
+                    <div class="dashboard-card glass-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> 24-Hour Glucose Prediction</h3>
+                            <div class="card-actions">
+                                <button class="btn-icon" onclick="refreshPredictions()">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="glucoseChart" width="800" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Medication Advisor -->
+                    <div class="dashboard-card glass-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-pills"></i> Medication Advisor</h3>
+                        </div>
+                        <div class="card-content">
+                            <div id="medicationAdvice" class="advice-container">
+                                <div class="loading-spinner">
+                                    <i class="fas fa-cogs fa-spin"></i>
+                                    <p>Calculating optimal dosage...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diet AI Assistant -->
+                    <div class="dashboard-card glass-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-robot"></i> Diet AI Assistant</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="food-checker">
+                                <div class="input-group">
+                                    <input type="text" id="foodInput" placeholder="Ask about any food...">
+                                    <button onclick="checkFoodSafety()" class="btn-primary">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div id="foodResult" class="result-box"></div>
+                            </div>
+                            
+                            <div class="quick-actions">
+                                <h4>Quick Checks:</h4>
+                                <div class="quick-buttons">
+                                    <button class="btn-small" onclick="quickFoodCheck('apple')">🍎 Apple</button>
+                                    <button class="btn-small" onclick="quickFoodCheck('rice')">🍚 Rice</button>
+                                    <button class="btn-small" onclick="quickFoodCheck('bread')">🍞 Bread</button>
+                                    <button class="btn-small" onclick="quickFoodCheck('chocolate')">🍫 Chocolate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Diet Plan -->
+                    <div class="dashboard-card glass-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-week"></i> Optimized Weekly Diet Plan</h3>
+                            <button class="btn-primary" onclick="generateDietPlan()">
+                                <i class="fas fa-magic"></i> Generate Plan
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div id="weeklyPlan" class="weekly-plan">
+                                <div class="plan-placeholder">
+                                    <i class="fas fa-utensils"></i>
+                                    <p>Your personalized weekly diet plan will appear here</p>
+                                    <button class="btn-primary" onclick="generateDietPlan()">
+                                        Generate My Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Health Alerts -->
+                    <div class="dashboard-card glass-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bell"></i> Health Alerts</h3>
+                        </div>
+                        <div class="card-content">
+                            <div id="healthAlerts" class="alerts-container">
+                                <!-- Alerts will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Digital Twin Status -->
+                    <div class="dashboard-card glass-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-brain"></i> Digital Twin Status</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="twin-status">
+                                <div class="status-item">
+                                    <span class="status-label">Model Accuracy</span>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span class="status-value">92%</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Data Learning</span>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 78%"></div>
+                                    </div>
+                                    <span class="status-value">78%</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Prediction Confidence</span>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="status-value">85%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="food-database.js"></script>
+    <script src="medication-engine.js"></script>
+    <script src="ai-predictor.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
